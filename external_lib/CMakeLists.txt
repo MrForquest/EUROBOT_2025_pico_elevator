@@ -1,0 +1,7 @@
+add_subdirectory(stepper)
+add_subdirectory(servo)
+add_subdirectory(tft)
+add_subdirectory(SCServo)
+add_subdirectory(myutils)
+add_subdirectory(pico_uart_transports)
+add_subdirectory(tribune_scripts)
