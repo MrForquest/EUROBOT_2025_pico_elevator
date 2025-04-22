@@ -8,7 +8,6 @@
 #include "INST.h"
 
 #define STEPPER_6_MM 1000
-#define CMD_VEL_100_MM 1000
 
 class MoveController {
 public:
@@ -22,7 +21,7 @@ public:
     void set_servo(int angles[4]);
     void set_grippers(int states[4]);
     void lift(int position);
-    void go_dist(u32 time, int direction);
+    void go_dist(float dist, float vel_mps, int direction);
     void set_pitch(s16 value, u16 speed);
     void set_pusher(s16 value, u16 speed);
     void set_visor(s16 value, u16 speed);
