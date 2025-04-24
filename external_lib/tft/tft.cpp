@@ -111,7 +111,7 @@ void Print_Number(int16_t num) {
 	myTFT.TFTdrawText(15, 35, str, ST7735_WHITE, ST7735_BLACK, 8);
 }
 
-void display_print_text(char *str) {
+void display_print_text(char str[]) {
 	myTFT.TFTfillScreen(ST7735_BLACK);
 	myTFT.TFTFontNum(myTFT.TFTFont_Default);
 	myTFT.TFTdrawText(15, 15, str, ST7735_WHITE, ST7735_BLACK, 4);
