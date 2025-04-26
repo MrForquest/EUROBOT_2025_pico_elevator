@@ -32,7 +32,6 @@ void MoveController::print_banner()
 void MoveController::build_tribune()
 {
     this->go_dist(0.1, 0.1, 1);
-    this->set_pitch(0, 100);
     this->lift(5 * STEPPER_6_MM);
     
     int states[] = {1, 0, 0, 1};
@@ -55,7 +54,7 @@ void MoveController::build_tribune()
     states[3] = 0;
     this->set_grippers(states);
     this->lift(45 * STEPPER_6_MM);
-    this->set_visor(100, 100);
+    this->set_visor(20, 100);
     sleep_ms(500);
     this->go_dist(0.1, 0.1, -1);
 }
@@ -78,10 +77,12 @@ void MoveController::collect()
 
     this->set_visor(100, 100);
     this->set_pusher(0, 100);
+    this->set_pitch(0, 100);
     int states0[] = {0, 0, 0, 0};
     this->set_grippers(states0);
     sleep_ms(500);
-    this->go_dist(0.15, 0.075, 1);
+    sms_sts_ptr->EnableTorque(1, 0);
+    this->go_dist(0.225, 0.075, 1);
     sleep_ms(500);
     this->set_visor(0, 100);
     sleep_ms(500);
@@ -90,7 +91,6 @@ void MoveController::collect()
     this->set_grippers(states);
     sleep_ms(500);
     this->lift(10 * STEPPER_6_MM);
-    this->set_pitch(20, 100);
     this->go_dist(0.15, 0.1, -1);
 }
 
@@ -134,8 +134,8 @@ void MoveController::set_pusher(s16 value, u16 speed)
 */
 void MoveController::set_pitch(s16 value, u16 speed)
 {
-    const s16 v1 = 2047; // 0 percents, опущено
-    const s16 v2 = 3070; // 100 percents, поднято
+    const s16 v1 = 1600; // 0 percents, опущено
+    const s16 v2 = 2500; // 100 percents, поднято
     const u8 servo_id = 1;
     this->set_waveshare_servo(servo_id, value, speed, v1, v2);
 }
