@@ -19,7 +19,7 @@ cmake_minimum_required(VERSION 3.12)
 #include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 include(pico_sdk_import.cmake)
 
-project(pico_micro_ros_example C CXX ASM)
+project(pico_elevator C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -29,11 +29,11 @@ pico_sdk_init()
 link_directories(libmicroros)
 add_subdirectory(external_lib)
 
-add_executable(pico_micro_ros_example
+add_executable(pico_elevator
     main.cpp
 )
 
-target_link_libraries(pico_micro_ros_example
+target_link_libraries(pico_elevator
     pico_stdlib
     microros
     pico_uart_transports
@@ -44,7 +44,7 @@ target_link_libraries(pico_micro_ros_example
     tft
 )
 
-target_include_directories(pico_micro_ros_example PUBLIC
+target_include_directories(pico_elevator PUBLIC
     libmicroros/include
 )
 
@@ -52,11 +52,11 @@ SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
 
 # Configure Pico
-pico_enable_stdio_usb(pico_micro_ros_example 1)
-pico_enable_stdio_uart(pico_micro_ros_example 0)
+pico_enable_stdio_usb(pico_elevator 1)
+pico_enable_stdio_uart(pico_elevator 0)
 add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_DEFAULT_CRLF=0)
 
 # Generate UF2
-pico_add_extra_outputs(pico_micro_ros_example)
+pico_add_extra_outputs(pico_elevator)

@@ -82,7 +82,7 @@ void MoveController::collect()
     this->set_grippers(states0);
     sleep_ms(500);
     sms_sts_ptr->EnableTorque(1, 0);
-    this->go_dist(0.15, 0.075, 1);
+    this->go_dist(0.225, 0.075, 1);
     sleep_ms(500);
     this->set_visor(0, 100);
     sleep_ms(500);
@@ -91,7 +91,7 @@ void MoveController::collect()
     this->set_grippers(states);
     sleep_ms(500);
     this->lift(10 * STEPPER_6_MM);
-    this->go_dist(0.15, 0.1, -1);
+    this->go_dist(0.225, 0.1, -1);
 }
 
 void MoveController::set_waveshare_servo(u8 servo_id, s16 position_percents, u16 speed_percents, s16 start_v, s16 end_v, u8 acc = 50)
