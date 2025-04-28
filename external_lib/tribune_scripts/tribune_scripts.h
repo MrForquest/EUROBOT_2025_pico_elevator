@@ -26,6 +26,7 @@ public:
     void set_pusher(s16 value, u16 speed);
     void set_visor(s16 value, u16 speed);
     void set_waveshare_servo(u8 servo_id, s16 position_percents, u16 speed_percents, s16 start_v, s16 end_v, u8 acc);
+    void set_position(int position);
 private:
     SMS_STS *sms_sts_ptr;
     rcl_publisher_t *twist_publisher_ptr;
