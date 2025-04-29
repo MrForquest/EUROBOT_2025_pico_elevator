@@ -53,6 +53,7 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           title: "Development Build"
-          prerelease: false
+          automatic_release_tag: "latest"
+          prerelease: true
           files: |
             pico_elevator.uf2
