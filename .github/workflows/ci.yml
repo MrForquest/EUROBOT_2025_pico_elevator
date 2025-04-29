@@ -19,17 +19,11 @@ jobs:
   pico_elevator:
     runs-on: ubuntu-latest
     container: ubuntu:jammy
-    permissions:
-      contents: write
 
     steps:
       - uses: actions/checkout@v4
         with:
           path: micro_ros_raspberrypi_pico_sdk
-      
-      - uses: ncipollo/release-action@v1
-          with:
-            bodyFile: "pico_elevator.uf2"
 
       - name: Dependencies
         shell: bash
@@ -50,3 +44,20 @@ jobs:
           make
           (test -f pico_elevator.uf2) && true || false
 
+      - name: Get date
+        id: date
+        run: echo "::set-output name=date::$(date +'%d-%m-%Y %H:%M')"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Update  ${{ steps.date.outputs.date }}
+          body_path: pico_elevator.uf2
+          draft: false
+          prerelease: false
