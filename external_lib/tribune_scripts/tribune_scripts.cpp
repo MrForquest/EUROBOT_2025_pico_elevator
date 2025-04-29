@@ -31,7 +31,7 @@ void MoveController::print_banner()
 
 void MoveController::build_tribune()
 {
-    this->go_dist(0.1, 0.1, 1);
+    // this->go_dist(0.1, 0.1, 1);
     this->lift(5 * STEPPER_6_MM);
 
     int states[] = {1, 0, 0, 1};
