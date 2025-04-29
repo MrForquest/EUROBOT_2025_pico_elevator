@@ -39,4 +39,4 @@ jobs:
           cd build
           cmake ..
           make
-          (test -f pico_micro_ros_example.uf2) && true || false
+          (test -f pico_elevator.uf2) && true || false
