@@ -19,11 +19,17 @@ jobs:
   pico_elevator:
     runs-on: ubuntu-latest
     container: ubuntu:jammy
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
         with:
           path: micro_ros_raspberrypi_pico_sdk
+      
+      - uses: ncipollo/release-action@v1
+          with:
+            bodyFile: "pico_elevator.uf2"
 
       - name: Dependencies
         shell: bash
@@ -43,13 +49,4 @@ jobs:
           cmake ..
           make
           (test -f pico_elevator.uf2) && true || false
-          
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-    - uses: actions/checkout@v4
-    - uses: ncipollo/release-action@v1
-      with:
-        bodyFile: "pico_elevator.uf2"
+
