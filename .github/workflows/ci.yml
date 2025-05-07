@@ -41,7 +41,7 @@ jobs:
           cmake ..
           make
           (test -f pico_elevator.uf2) && true || false
-
+          
       - name: Get date
         id: date
         run: echo "::set-output name=date::$(date +'%d-%m-%Y %H:%M')"
