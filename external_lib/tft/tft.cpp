@@ -107,7 +107,7 @@ void Print_Number(int16_t num) {
 	myTFT.TFTFontNum(myTFT.TFTFont_Default);
 
 	char str[MAX_BIT_DEPTH];
-	snprintf(str, MAX_BIT_DEPTH, "%d", num);
+	snprintf(str, MAX_BIT_DEPTH, "%d.", num);
 	myTFT.TFTdrawText(15, 35, str, ST7735_WHITE, ST7735_BLACK, 8);
 }
 

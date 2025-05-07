@@ -31,15 +31,15 @@ void MoveController::print_banner()
 
 void MoveController::build_tribune()
 {
-    this->go_dist(0.1, 0.1, 1);
+    // this->go_dist(0.1, 0.1, 1);
     this->lift(5 * STEPPER_6_MM);
-    
+
     int states[] = {1, 0, 0, 1};
     this->set_grippers(states);
     sleep_ms(500);
-    this->lift(8 * STEPPER_6_MM);
     this->go_dist(0.1, 0.1, -1);
     sleep_ms(500);
+    this->lift(8 * STEPPER_6_MM);
     set_pusher(100, 100);
     sleep_ms(500);
     set_pusher(0, 100);
@@ -80,10 +80,11 @@ void MoveController::collect()
     this->set_pitch(0, 100);
     int states0[] = {0, 0, 0, 0};
     this->set_grippers(states0);
-    sleep_ms(500);
+    // this->lift(0.3 * STEPPER_6_MM);
     sms_sts_ptr->EnableTorque(1, 0);
-    this->go_dist(0.225, 0.075, 1);
-    sleep_ms(500);
+    sleep_ms(800);
+    this->go_dist(0.275, 0.075, 1);
+    sleep_ms(300);
     this->set_visor(0, 100);
     sleep_ms(500);
     this->lift(5 * STEPPER_6_MM);
@@ -91,7 +92,7 @@ void MoveController::collect()
     this->set_grippers(states);
     sleep_ms(500);
     this->lift(10 * STEPPER_6_MM);
-    this->go_dist(0.15, 0.1, -1);
+    // this->go_dist(0.15, 0.1, -1);
 }
 
 void MoveController::set_waveshare_servo(u8 servo_id, s16 position_percents, u16 speed_percents, s16 start_v, s16 end_v, u8 acc = 50)
@@ -200,5 +201,10 @@ void MoveController::lift(int new_pos)
     {
         stepper(0, -delta_pos);
     }
+    position = new_pos;
+}
+
+void MoveController::set_position(int new_pos)
+{
     position = new_pos;
 }

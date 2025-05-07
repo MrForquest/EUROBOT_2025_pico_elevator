@@ -5,15 +5,16 @@ on:
     inputs:
       name:
         description: "Manual trigger"
-  schedule:
-    - cron:  '0 4 * * *'
+  push:
+      tags:
+      - '*'
   pull_request:
     branches:
       - '**'
 
 jobs:
 
-  micro_ros_raspberrypi_pico_sdk:
+  pico_elevator:
     runs-on: ubuntu-latest
     container: ubuntu:jammy
 
@@ -40,3 +41,17 @@ jobs:
           cmake ..
           make
           (test -f pico_elevator.uf2) && true || false
+          
+      - name: Get date
+        id: date
+        run: echo "::set-output name=date::$(date +'%d-%m-%Y %H:%M')"
+
+      - name: Create Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          title: "Development Build"
+          automatic_release_tag: "version_$(date +'%d-%m-%Y_%H:%M')"
+          prerelease: true
+          files: |
+            pico_elevator.uf2
